@@ -26,6 +26,7 @@ class Post(models.Model):
     liked = models.ManyToManyField(User, blank=True, related_name='liked')
     date_posted = models.DateTimeField(default=timezone.now)
     header_image = models.ImageField(null=True,blank = True,upload_to = "images")
+    # header_image = models.FileField(null=True,blank = True)
     objects = PostManager()
 
     class Meta:
@@ -36,6 +37,8 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('post_detail', kwargs={'pk': self.pk})
+
+
 
 
 class Comment(models.Model):

@@ -13,6 +13,8 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
+from .models import Post
+ 
 
 
 class PostListView(ListView):
@@ -99,3 +101,8 @@ def add_comment(request, pk):
     else:
         return redirect('post_detail', pk=pk)
     return redirect('post_detail', pk=pk)
+
+
+
+
+ 

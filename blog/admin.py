@@ -4,15 +4,19 @@ from .models import Post, Comment
 class CommentInline(admin.TabularInline): # new
     model = Comment
 
+
+
 class PostAdmin(admin.ModelAdmin):
     inlines = [
-        CommentInline,
+        CommentInline
     ]
     list_display = ('id', 'title', 'author', 'date_posted')
     list_display_links = ('id', 'title')
     list_filter = ('author', 'date_posted')
     search_fields = ('title', 'content', 'author')
     list_per_page = 20
+
+    
      
 
 
@@ -27,6 +31,7 @@ class CommentAdmin(admin.ModelAdmin):
     list_editable = ('approved_comment', )
     search_fields = ('author', 'post')
     list_per_page = 20
+
 
 
 admin.site.register(Post, PostAdmin)
