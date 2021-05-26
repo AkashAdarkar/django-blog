@@ -1,0 +1,81 @@
+{% extends 'blog/base.html' %}
+
+
+
+
+
+<!--<article class="media content-section">
+  <img class = " rounded-circle article-img"src="{{ post.author.profile.image.url }}" alt="">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
+        <small class="text-muted">{{ post.post_posted|date:'d F Y'}}</small>
+      </div>
+      <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+      <p class="article-content">{{ post.content }}</p>
+    </div>
+  </article>-->
+ 
+{% block title %}Posts{% endblock title %}
+
+{% block content %}
+<!-- Search Form -->
+<form class="form-inline my-3 my-lg-2 pb-2 search_center" >
+ 
+
+  <!-- <form class="form-inline my-2 my-lg-3 pb-2"> -->
+    <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search" aria-label="Search" style="width:79%">
+    
+      <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Search" style="width:20%" >
+  </form>
+{% for post in posts %}
+
+
+  
+    <div class=" card " >
+      <div class="  card-header ">
+        <img class = " rounded-circle article-img"src="{{ post.author.profile.image.url }}" alt="">
+        <a  class = "article-title"href="{% url 'post_detail' post.pk %}" ><span class="font-weight-bold ">{{ post.title }}</span> &middot;</a>
+       <span class="text-muted">by  <a href="{% url 'user_posts' post.author.username  %}">{{ post.author }} </a>| {{ post.date_posted|date:'d F Y' }}</span>
+      </div>
+      <div class="card-body">
+        
+        {{ post.content|safe|truncatewords:"80"|linebreaks }}
+        {%ifnotequal post.content post.content|truncatewords:80%}
+          <a class="btn btn-outline-info btn-sm"  href="{% url 'post_detail' post.pk %}">Read more</a>
+        {% endifnotequal %}
+      </div>
+      <!--<div class="card-footer text-center text-muted">
+        <a href="#">Edit</a> |
+        <a href="#">Delete</a>
+      </div>-->
+    </div>
+    <br />
+   
+  
+  {% endfor %}
+
+
+{% if is_paginated %}
+
+      {% if page_obj.has_previous %}
+        <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+      {% endif %}
+
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+      {% endif %}
+
+    {% endif %}
+
+{% endblock content %}
