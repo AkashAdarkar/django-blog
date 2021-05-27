@@ -150,7 +150,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 #CKeditor settings
 CKEDITOR_CONFIGS = {
 'default': {
-    'toolbar': None, #You can change this based on your requirements.
+    # 'toolbar': None, #You can change this based on your requirements.
     'width': 'auto ! important',
 
           },
