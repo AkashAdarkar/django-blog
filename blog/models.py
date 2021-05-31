@@ -4,6 +4,7 @@ from django.urls import reverse
 # from django.conf import settings
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
+from taggit.managers import TaggableManager
 
 
 
@@ -26,8 +27,11 @@ class Post(models.Model):
     liked = models.ManyToManyField(User, blank=True, related_name='liked')
     date_posted = models.DateTimeField(default=timezone.now)
     header_image = models.ImageField(null=True,blank = True,upload_to = "images")
+    header_image2 = models.ImageField(null=True,blank = True,upload_to = "images")
+    header_image3 = models.ImageField(null=True,blank = True,upload_to = "images")
     # header_image = models.FileField(null=True,blank = True)
     objects = PostManager()
+    tags = TaggableManager()
 
     class Meta:
         ordering = ('-date_posted', )

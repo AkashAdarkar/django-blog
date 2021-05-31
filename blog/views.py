@@ -14,7 +14,7 @@ from django.views.generic import (
     DeleteView
 )
 from .models import Post
- 
+from taggit.models import Tag
 
 
 class PostListView(ListView):
@@ -62,7 +62,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
-    fields = ['title', 'content','header_image']
+    fields = ['title', 'content','header_image','header_image2','header_image3','tags']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -103,6 +103,16 @@ def add_comment(request, pk):
     return redirect('post_detail', pk=pk)
 
 
+def tagged(request, pk):
+    tag = get_object_or_404(Tag, pk=pk)
+    common_tags = Post.tags.most_common()[:4]
+    posts = Post.objects.filter(tags=tag)
+    context = {
+        'tag':tag,
+        'common_tags':common_tags,
+        'posts':posts,
+    }
+    return render(request, 'post_form', context)
 
 
- 
+
