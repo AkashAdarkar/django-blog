@@ -26,7 +26,14 @@
               <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
             </div>
           <h2><a class="article-title" href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h2>
-            <p class="article-content">{{ post.content|safe|linebreaks }}</p>
+            <p class="article-content">{{ post.content|safe|truncatewords:"80"|linebreaks }}</p>
+
+
+        <!--{{ post.content|safe|truncatewords:"80"|linebreaks }}-->
+        {%ifnotequal post.content post.content|truncatewords:80%}
+          <a class="btn btn-outline-info btn-sm"  href="{% url 'post_detail' post.pk %}">Read more</a>
+        {% endifnotequal %}
+
           </div>
         </article>
     {% endfor %}
