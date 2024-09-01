@@ -3,13 +3,21 @@
 [![](https://img.shields.io/badge/django-2.0%20%7C%202.1%20%7C%202.2-success.svg)](https://djangoproject.com/)
 [![](https://img.shields.io/apm/l/vim-mode.svg)](https://choosealicense.com/licenses/mit/)
 
+
+
 Full-Featured Blog with Django web framework. 
 
 Screenshots
-=
-<img src="screenshots/index.png" width=400><img src="screenshots/login.png" width=400>
-<img src="screenshots/profile.png" width=400><img src="screenshots/new_post.png" width=400>
-<img src="screenshots/post.png" width=400><img src="screenshots/delete.png" width=400>
+
+![](./screenshots/Index%20Page.png)
+![](./screenshots/Comments.png)
+![](./screenshots/Login%20Page.png)
+![](./screenshots/create%20post%20page%20.png)
+![](./screenshots/Register%20Page.png)
+![](./screenshots/users%20total%20posts.png)
+![](./screenshots/update%20profile%20page.png)
+![](./screenshots/drop-menu%20navigation%20bar.png)
+![](./screenshots/password%20reset%20page.png)
 
 Features 
 =
